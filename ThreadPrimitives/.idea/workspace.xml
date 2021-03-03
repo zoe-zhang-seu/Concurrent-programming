@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c2999455-262a-4832-9055-bdc677453135" name="Default Changelist" comment="a trial">
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadJoin1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadJoin2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadSleep.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadYield.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadYield2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyThread/src/ThreadYield3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyThread/src/MyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyThread/src/MyThread.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1pDvlscicEGydmlnsFtGoh5YHwy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunManager" selected="Application.ThreadJoin2">
+    <configuration name="ThreadJoin1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ThreadJoin1" />
+      <module name="MyThread" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadJoin2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ThreadJoin2" />
+      <module name="MyThread" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadYield2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ThreadYield2" />
+      <module name="MyThread" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadYield3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ThreadYield3" />
+      <module name="MyThread" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UseMyThread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UseMyThread" />
+      <module name="MyThread" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ThreadJoin2" />
+        <item itemvalue="Application.ThreadJoin1" />
+        <item itemvalue="Application.ThreadYield3" />
+        <item itemvalue="Application.ThreadYield2" />
+        <item itemvalue="Application.UseMyThread" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c2999455-262a-4832-9055-bdc677453135" name="Default Changelist" comment="" />
+      <created>1614730629611</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614730629611</updated>
+    </task>
+    <task id="LOCAL-00001" summary="a trial">
+      <created>1614733639761</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614733639762</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="a trial" />
+    <option name="LAST_COMMIT_MESSAGE" value="a trial" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="378" y="23" key="CommitChangelistDialog2" timestamp="1614734786254">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state x="378" y="23" key="CommitChangelistDialog2/0.23.1440.806@0.23.1440.806" timestamp="1614734786254" />
+    <state x="378" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1614733639491" />
+    <state width="693" height="203" key="GridCell.Tab.0.bottom" timestamp="1614742337496">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state width="693" height="203" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1614742337496" />
+    <state width="693" height="203" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1614742033167" />
+    <state width="693" height="203" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1614740545557" />
+    <state width="693" height="203" key="GridCell.Tab.0.center" timestamp="1614742337495">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state width="693" height="203" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1614742337495" />
+    <state width="693" height="203" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1614742033166" />
+    <state width="693" height="203" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1614740545556" />
+    <state width="693" height="203" key="GridCell.Tab.0.left" timestamp="1614742337494">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state width="693" height="203" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1614742337494" />
+    <state width="693" height="203" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1614742033165" />
+    <state width="693" height="203" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1614740545555" />
+    <state width="693" height="203" key="GridCell.Tab.0.right" timestamp="1614742337496">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state width="693" height="203" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1614742337496" />
+    <state width="693" height="203" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1614742033166" />
+    <state width="693" height="203" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1614740545557" />
+    <state x="737" y="70" width="670" height="676" key="search.everywhere.popup" timestamp="1614739864539">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="737" y="70" width="670" height="676" key="search.everywhere.popup/0.23.1440.811@0.23.1440.811" timestamp="1614739864539" />
+  </component>
+</project>
