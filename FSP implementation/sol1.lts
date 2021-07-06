@@ -1,0 +1,66 @@
+//ID:1132371
+//Name: yanni zhang
+//Account: YANNZHANG
+
+const Full = 1// the position is full
+const Free = 0// the position is empty
+const Scanned = 2//the vial finished scanning process
+const NonDetectiveVial = 3 // the vial is non-defective vial
+const DetectiveVial = 4//the vial is defective vial
+const UntaggedVial = 5 // the vial has not been tagged
+const TaggedVial = 6// the vial has been tagged
+
+range State = Free..TaggedVial //the state of carousel, regulate the vial and compartment position status 
+range InsState = Free..Full// the state of inspector, inspector has vial is Full(1), inspector has no vial is Free(0)
+
+PRODUCER = (putC1Vial -> PRODUCER).//the role of producer
+CONSUMER = (getC5Vial -> CONSUMER).//the role of consumer
+SCANNER = (scanC3Vial -> SCANNER).//the role of scanner
+
+CAROUSEL = CAROUSEL[Free][Free][Free][Free][Free],//initialize the original carousel has 5 empty hole
+CAROUSEL[c1:State][c2:State][c3:State][c4:State][c5:State] = // each state is free(0), full(1)
+(
+	when(c1 ==Free) putC1Vial ->  //producer insert vial at c1 when it is empty
+	(
+		c1.v.d__ ->CAROUSEL[DetectiveVial][c2][c3][c4][c5]//insert defective vial
+	|   c1.v.___ ->CAROUSEL[NonDetectiveVial][c2][c3][c4][c5]//insert non_defective vial
+	)
+
+  | when(c5 !=Free) getC5Vial -> CAROUSEL[c1][c2][c3][c4][Free]//consumer take c5 vial when c5 has vial
+  | when(c3 !=Free ) scanC3Vial -> //scan the vial when c3 is not empty, the tagged vial will also been scanned, c3 !=0 
+	(	//the defective vial need inspection, the defectiveVial value(4) means it not yet tagged (6)
+		when(c3 ==DetectiveVial ) getC3Vial -> CAROUSEL[c1][c2][Free][c4][c5]
+		//the non_defectiveVial(3) or taggedVial(6) need to be been rotated to the next position
+	  | when(c3 ==NonDetectiveVial || c3 ==TaggedVial) rotate -> CAROUSEL[Free][c1][c2][c3][c4]
+	)
+	//this is for the return process, the c3 is free(0) and able to be inserted tagedvial(6)
+  | when(c3 == Free) insertToC3  -> CAROUSEL[c1][c2][TaggedVial][c4][c5]
+  | when((c3 !=NonDetectiveVial)&&(c3 !=DetectiveVial) )rotate -> CAROUSEL[Free][c1][c2][c3][c4]//regular rotatiton
+).
+
+SHUTTLE = 
+(	  //direction: from carousel c3 to inspector
+	  getC3Vial -> set_inspector_full ->inspect -> SHUTTLE
+	  //direction: from inspector to carousel c3
+	| return -> release_inpector_space ->insertToC3 -> SHUTTLE
+).
+
+INSPECTOR = INSP[Free],//initialize the inspector is not busy
+INSP[i:InsState] = 
+(
+	  inspect -> tagVial -> return -> INSP[Full]
+	| when(i == Full) release_inpector_space -> INSP[Free]//release the inspector space, the reset it as empty
+	| when(i ==	Free) set_inspector_full -> INSP[Full]//set the inspector has vial at this position
+).
+
+||SIM =(PRODUCER||CONSUMER||CAROUSEL||SHUTTLE||INSPECTOR).//let each process combine together
+
+//check safety
+//property MUTEX = (getC3Vial ->set_inspector_full ->inspect->tagVial -> return ->release_inpector_space ->insertToC3->MUTEX).
+property MUTEX1 = (getC3Vial ->set_inspector_full ->inspect->MUTEX1).
+property MUTEX2 = (return -> release_inpector_space ->insertToC3 ->MUTEX2).
+||SAFETY_CHECK = (SIM||MUTEX1||MUTEX2).
+//check liveness
+progress LIVENESS = {getC3Vial,return}
+
+

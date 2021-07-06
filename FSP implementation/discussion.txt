@@ -1,0 +1,34 @@
+ID:1132371
+Name: yanni zhang
+Account: YANNZHANG
+
+####Safety and liveliness check of two models:
+The sol1 violates the safety check and passes the liveness check. The reason is that the entrance and exit of the inspector are on the same path, which cannot tolerate conflict. The sol2 passes the safety and liveness check since the tagged vial, and qualified vial have separate exit paths.
+
+####The problem in LTSA:
+LTSA safety check only shows the first violation trace, which is hard to debug and find the other possibilities. Compared with java implementation, it can run multiple times to generate the possible vial input and output situations as much as possible.  I think java implementation is easier to evaluate the solution quality since it shows multiple situations and mimics the time than LTSA, which only shows one violation trace if it is detected. In this case, it is hard to get other safety violation circumstances by LTSA in sol1.
+
+####sol2 has no problem exists
+I think sol2 has no problem exists. The reason is that safety checks use BFS to find the shortest trace, which shows there is no shortest trace of deadlock in sol2. The progress check also has no violation, which means the actions are designed in the proper order.
+
+--------------------------------------------------------------
+###Sol1
+>>System Design:
+1. How to manage carousel
+The carousel process is implemented by changing the state of each position. The when() condition ->New state in FSP mimics the java wait/notify-all function. The detective and not-tagged vial at c3 will be taken towards the shuttle. The function is invoked by calling the action at the same time.
+2.how to regulate the vial attributes(defective ->scanned->tagged). 
+> different const numbers represent specific vial status. It reduces the design complexity by combine three attributes with only one character. Also, the reader/writer is not suitable for the vial since it adds complexity.
+3.how to ensure every vial is scanned? whether or not need priority action?
+> add the when(c3 is not scanned) the carousel cannot rotate to ensure all the vial is scanned. The order of (scan ->  shuttle->inspect ->shuttle->insert -> rotate) is achieved by form the action chain. 
+
+--------------------------------------------------------------
+###Sol2
+>>>>>>System design:
+Add a new inspection carousel, I1 receives the shuttled vial, finishes the inspection and tag process, I2 gives the collecter tagged vial. The inspector process the I1 position vial.
+
+>>>>>Problem faced with sol2
+1. multiple choice of the action order -> solution: priority actions
+I set the priority actions to ensure that the inspection actions implemented before release inspector space
+2. Add a new inspect carousel 
+
+
