@@ -1,0 +1,386 @@
+Id: 1132371
+Name: YANNZHANG
+
+Solution 2 system design: 
+The newly added carousel: 
+	"I1" is the compartment[0] in the inspection carousel. 
+	"I2" is the compartment[1] in the inspection carousel to collect a tagged vial by the quality manager at random intervals
+
+###############################################
+#Existed class                                #
+###############################################
+
+------------------------------------------------
+#Sim2
+Aim:
+	create the threads of carousel, carousel driver, producer , 
+	consumer, inspection, shuttle and scanner. 
+------------------------------------------------
+#Carousel
+Aim: 	hold vials, rotate the carousel
+	producer put vial on carousel
+	consumer get vial from carousel
+
+>Variable
+Name:	compartment
+Type:	Vial[]
+
+>constant
+Name:	indentation
+Type:	final private static String
+Aim:	for typing format
+
+>method
+Name: 	putVial(Vial vial)
+Aim:	put vial at C1 position
+
+Name:	putC3Vial(Vial vial)****
+Aim:	put vial at C3 position
+
+Name:	getVial()****
+Aim:	get vial from the C5 position
+	add a wait() when final, when C5 vial is tagged,
+	wait for carousel rotate to send extra vial
+
+Name:	getC3Vial()****
+Aim:	take c3 vial from the carousel
+
+Name:	scanTheVial()****
+Aim:	scan the C3 vial, give info whether or not need inspection
+
+Name:	rotate()
+Aim:	rotate the vial
+	
+Name:	isEmpty()
+Aim:	check the carousel is empty or not
+
+Name:	toString()
+Aim:	may used for the print
+
+
+------------------------------------------------
+#CarouselDrive
+Aim:	let carousel rotate at determined intervals
+
+>variable
+Name:	carousel
+Type:	Carousel
+Aim: 	an object of Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+>method
+Name:	run()
+Aim:	let carousel rotate
+
+------------------------------------------------
+#Producer
+Aim:	put vial on the C1 position
+
+>variable
+Name:	carousel
+Type:	Carousel
+Aim: 	an object of Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+>Method
+Name:	run()
+Aim:	put random vial at C1 position at random intervals 
+
+------------------------------------------------
+#Consumer
+Aim:	take vial from the C5 position
+>variable
+Name:	carousel
+Type:	Carousel
+Aim: 	an object of Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+>Method
+Name:	run()
+Aim:	take not defective vial from C5 position
+
+ 
+------------------------------------------------
+#Vial
+Aim:	set vial features
+
+>variable
+Name:	defective
+Type:	boolean
+
+Name:	inspected
+Type:	boolean
+
+Name:	tagged
+Type:	boolean
+
+Name:	scanned
+Type:	boolean
+
+Name:	id
+Type:	int
+
+>constant
+Name:	r
+Type:	Random
+Aim: 	get random value, is used for random vial and interval
+
+Name:	nextId
+Type:	int
+Aim:	next allocated id
+
+>method
+Name:	getInstance()
+Aim:	create. A vial instance
+
+Name:	getId()
+Aim:	get vial id
+
+Name:	setDefective()
+Aim:	set vial is defective
+
+Name:	isDefective()
+Aim:	return vial status
+
+Name:	setInspected()
+Aim:	set vial is inspected
+
+Name:	isInspected()
+Aim:	return vial status
+
+Name:	setTagged()
+Aim:	set vial is tagged
+
+Name:	isTagged()
+Aim:	return vial status
+
+Name:	setIsScanned()
+Aim:	set vial has finished scanning 
+
+Name:	isScanned()
+Aim:	return vial status
+
+Name:	toString()
+Aim:	for the result printing
+
+------------------------------------------------
+VaccinieHandlingThread
+>variable
+name:	terminateException
+Type:	Exception
+Aim:	handle termination situation
+
+>method
+Name:	terminate(Exception exception)
+Aim:	terminate the thread
+
+Name:	getTerminateException()
+Aim:	return the exception info
+------------------------------------------------
+#Params
+Aim:	store the constants
+
+>constant
+Name:	CAROUSEL_SIZE
+Type:	int
+Aim:	the number of compartments in the carousel
+
+Name:	INSPECTION_CAROUSEL_SIZE
+Type:	int
+Aim:	the number of compartments in the inspection carousel
+
+Name:	PRODUCER_MAX_SLEEP
+Type:	int
+Aim:	help set the upper limit of producer  interval
+
+Name:	CONSUMER_MIN_SLEEP
+Type:	int
+Aim:	set the lower limit of consumer time interval
+
+Name:	CONSUMER_MAX_SLEEP
+Type:	int
+Aim:	set the upper limit of consumer time interval
+
+Name:	DRIVE_TIME
+Type:	int
+Aim:	carousel rotate time interval : move 1 unit, e.g. C1->C2
+
+Name:	SHUTTLE_TIME
+Type:	int
+Aim:	the time for 1 direction transmission
+
+Name:	INSPECT_TIME
+Type:	int
+Aim:	inspection time perior
+
+Name:	DEFECT_PROB
+Type:	int
+Aim:	set the probability of vial is defective
+
+
+
+------------------------------------------------
+
+
+
+
+
+###############################################
+#New added class                              #
+###############################################
+------------------------------------------------
+#InspectionBay class#
+Aim: An inspection bay to test the quality of vial, the defective vial will be given tags
+ ("i") represents inspected and ("t") represents tagged.
+
+>Variable
+Name:	insCarousel
+Type:	InspectionCarousel
+Aim:	represents inspection carousel object from that class
+
+
+>Method
+Name:	run()
+Aim:	handle inspection process, and mimic the inspection time period
+--------------------------------------------------
+#InspectonCarousel
+Aim: The carousel holds vials of vaccine and rotates them, position 0 is designed for receiving the inspection vial position 1 is designed for collect the tagged vial from this carousel
+
+>Variable
+Name:	compartment
+Type:	Vial[]
+Aim:	the items in the inspection carousel segments
+
+>constant
+Name:	indentation
+Type:	final private static String
+Aim:	for typing format
+
+>Method
+Name:	putVial(Vial vial)
+Aim:	Insert a vial into the carousel position [0]. while this position is not empty, wait for this space to release. Then, put the vial in position [0]. print the event.notify others that the carousel situation is changed.
+
+Name:	getVial()
+Aim:	Remove a vial from the final compartment of the carousel, when position [1] has no vial, wait for the vial then get the vial can print the result.
+
+Name:	rotate()
+Aim:	Rotate the carousel one position. when the position [0] vial is not inspection, wait for the inspection period finish. The event printing:  "I0" represents the inspection carousel position 0 to put and recive inspection vial, "I1" represents the inspection carousel position 1 for quality manager to collect vial
+
+Name:	isEmpty()
+Aim:	check the carousel is empty or not
+
+Name:	toString()
+Aim:	may used for the print
+
+Name:	inspection()
+Aim:	inspect the vial at this position and give tag. Situation 1: inspection bay has no vial and wait for the vial insertion. Situation 2: Inspection bay has vial && not inspected. Process : 1.set tags "i" "t". 2.mimic the time period. 3.after this done, notify other threads that vial status has been changed
+
+--------------------------------------------------
+#InspectionCarouselDrive
+Aim:	let carousel rotate at determined intervals
+
+>variable
+Name:	carousel
+Type:	InspectionCarousel
+Aim: 	an object of Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+>method
+Name:	run()
+Aim:	let inspection carousel rotate
+--------------------------------------------------
+#QualityManager
+Aim: 	the quality manager take vials from the position 1 of inspection carousel at random intervals
+
+>variable
+Name:	carousel
+Type:	Inspection carousel
+Aim: 	an object of inspection Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+>Method
+Name:	run()
+Aim:	take defective and tagged vial from position 1 of inspection carousel
+
+--------------------------------------------------
+#Scanner
+Aim: scan the C3 vial at carousel 
+
+>Variable
+Name:	carousel
+Type:	Carousel
+Aim: 	an object of Carousel class, help invoke methods within this class
+	also, vials are shared resources
+
+Name:	shuttle
+Type:	Shuttle
+Aim:	an object of shuttle class, help invoke methods within this class
+	also, vials are shared resources
+
+>Method
+Name:	run()
+Aim: 	handle the scanning process, and let shuttle check C3 has vial to get the 
+	key of lock (when C3, shuttle, inspection are all empty)
+
+
+
+------------------------------------------------
+#Shuttle
+Aim: 	transfer a vial each time, has 2 direction
+	forward transmission: carousel C3->Shuttle -> inspection
+	backward transmission: inspection -> Shuttle -> carousel C3
+>Variable
+Name:	inspection
+Type:	Inspection
+Aim:	an object of inspection, help invoke methods within this class
+	also, vials are shared resources
+
+Name:	carousel
+Type:	Carousel
+Aim:	an object of carousel, help invoke methods within this class
+	also, vials are shared resources
+
+Name:	shuttleVial
+Type:	protected volatile Vial
+Aim:	the vial at the shuttle
+
+>constant
+Name:	indentation
+Type:	final private static String
+Aim:	for typing format
+
+>method
+Name:	isWholeEmpty()
+Aim:	when C3, shuttle, inspection all have no empty, wait
+
+Name:	waitRelease()
+Aim:	when inspection and C3 both have vial, wait for release
+
+Name:	ForwardTransProcess()
+Aim:	handle carousel C3 -> shuttle -> Inspection transmission, a vial each time
+
+Name:	putShuttleVial(Vial vial)
+Aim:	put vial at shuttle
+
+Name:	getShuttleVial()
+Aim:	take vial from shuttle and clean the shuttle data
+
+Name:	reintiallizeShuttle()
+Aim:	clean the shuttle data
+
+Name:	checkC3HasVial()
+Aim:	when C3 has vial notify threads, help wake from the block(C3, shuttle, 
+	inspection all are empty)
+
+Tip:    I delete the backward transfer, because if and only if the vial in inspection carousel[0] vial is normal, inspected, not tagged "(-I-)",then the vial will be sent in the backward transmission, According to the task description, there is no non-defective vial will be sent to the inspection bay
+
+------------------------------------------------
+
+
+
+
+
+
+
+
+

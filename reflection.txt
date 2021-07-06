@@ -1,0 +1,19 @@
+Id: 1132371
+Name: YANNZHANG
+
+>>>>how to ensure shuttle function correctly
+I set 3 base settings to ensure each defective vial will be sent to the inspection bay when the system is not stuck. The base setting:[1] If the shuttle is empty, a vial can be put on the shuttle regardless both ends are released or not.[2] The carousel will wait for the scanner to finish the process. The inspection carousel will wait for the inspection bay to complete the inspection.[3]The carousel will wait for the shuttle to take the defective vial. I find the defective vial may fail to get inspection and passed into next position without these settings
+
+>>>>compare the solution 1 and 2
+The key of solution 1's failure is that the inspection system's entrance and exit are at the same position C3.The problem that occurs to solution 1 is that the (dit) vial in the shuttle fails to insert C3 position since this position is used by a (d--) vial, which wants to be shuttled to get inspection. Decreasing the inspection and shuttle time and increasing the random interval that the vial is produced cannot solve this problem.  Solution 2 solves this problem by splitting the defective vial and standard vial in a different vial so that there is no blockage of input and output.
+
+>>>>analyse the task
+The role of producer and consumer occur in different relationships: [1] carousel C3 before inspection : producer -> carousel ; consumer -> forward transmission [2]Carousel C3 after inspection : producer -> backward transmission ; consumer ->carousel [3]Inspection : producer -> forward transmission  ; consumer -> backward transmission
+
+
+>>>>The difficulty I faced
+1] Each time, the output is different, which is hard to check whether that bug is fixed. I have to run several times waiting for that situation appear.
+2] The thread may run at any time, which makes it very important to set the specific criteria for each while(){wait();} loop.
+3] The carousel and its vial are the shared resources. It is better to edit the value by invoking the object of the carousel. I spent lots of time trying to change the vial's value via instance variable but find it is not a good choice because of updating the value. Using the object of a target class directly makes it more straightforward to edit the shared variable.
+
+
